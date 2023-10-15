@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
             background-color: black;
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            padding: 10px;
         }
 
         .category {
             display: flex;
+            flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
         }
 
         .category label {
-            margin-right: 10px;
-            text-align: right; /* Alinea el texto a la derecha */
-            font-weight: bold; /* Estilo en negrita */
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
         .category input[type="checkbox"] {
@@ -35,7 +32,6 @@
             width: 60px;
             height: 34px;
             position: relative;
-            margin-left: 10px; /* Margen izquierdo */
         }
 
         .toggle-box input {
@@ -67,11 +63,11 @@
         }
 
         .toggle-box input:checked + .slider {
-            background-color: #2196F3; /* Color azul cuando está activo */
+            background-color: #2196F3;
         }
 
         .toggle-box input:focus + .slider {
-            box-shadow: 0 0 1px #2196F3; /* Sombra azul en foco */
+            box-shadow: 0 0 1px #2196F3;
         }
 
         .toggle-box input:checked + .slider:before {
@@ -96,7 +92,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 0, 0, 0.7); /* Fondo rojo con opacidad */
+            background-color: rgba(255, 0, 0, 0.7);
             color: white;
             text-align: center;
             font-size: 24px;
@@ -125,7 +121,7 @@
     <h1>¿Qué quieres para tu vida?</h1>
     <div class="category">
         <label>
-            1 - "Pareja Feliz"
+            1 "Pareja Feliz"
         </label>
         <label for="category1" class="toggle-box">
             <input type="checkbox" id="category1">
@@ -134,7 +130,7 @@
     </div>
     <div class="category">
         <label>
-            2 - "Vida familiar feliz"
+            2 "Tener Dinero"
         </label>
         <label for="category2" class="toggle-box">
             <input type="checkbox" id="category2">
@@ -143,7 +139,7 @@
     </div>
     <div class="category">
         <label>
-            3 - "Casa Bonita y Propia"
+            3 "Casa Bonita y Propia"
         </label>
         <label for="category3" class="toggle-box">
             <input type="checkbox" id="category3">
@@ -152,7 +148,7 @@
     </div>
     <div class="category">
         <label>
-            4 - "Prosperidad Económica y Financiera"
+            4 "Prosperidad Económica y Financiera"
         </label>
         <label for="category4" class="toggle-box">
             <input type="checkbox" id="category4">
@@ -161,7 +157,7 @@
     </div>
     <div class="category">
         <label>
-            5 - "Salud Mental y Corporal"
+            5 "Salud Mental y Corporal"
         </label>
         <label for="category5" class="toggle-box">
             <input type="checkbox" id="category5">
@@ -170,7 +166,7 @@
     </div>
     <div class="category">
         <label>
-            6 - "Seguridad del Sitio en el que Vivo"
+            6 "Seguridad del Sitio en el que Vivo"
         </label>
         <label for="category6" class="toggle-box">
             <input type="checkbox" id="category6">
@@ -179,7 +175,7 @@
     </div>
     <div class="category">
         <label>
-            7 - "Sentimiento de Autorrealización"
+            7 "Sentimiento de Autorrealización"
         </label>
         <label for="category7" class="toggle-box">
             <input type="checkbox" id="category7">
@@ -188,7 +184,7 @@
     </div>
     <div class="category">
         <label>
-            8 - "Vida Social satisfactoria"
+            8 "Vida Social y Familiar Satisfactoria"
         </label>
         <label for="category8" class="toggle-box">
             <input type="checkbox" id="category8">
@@ -214,7 +210,7 @@
                     activeCheckboxes++;
                     if (activeCheckboxes > 4) {
                         attempts++;
-                        if (attempts > 2) {
+                        if (attempts > 3) {
                             // Mostrar el modal en color rojo
                             const modal = document.getElementById("myModal");
                             modal.style.display = "block";

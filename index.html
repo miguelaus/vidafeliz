@@ -108,6 +108,10 @@
             border: 2px solid white;
         }
 
+        .modal-content img {
+            max-width: 100%;
+        }
+
         .close-button {
             position: absolute;
             top: 10px;
@@ -208,7 +212,15 @@
             checkbox.addEventListener('change', () => {
                 if (checkbox.checked) {
                     activeCheckboxes++;
-                    if (activeCheckboxes > 4) {
+                    if (activeCheckboxes === checkboxes.length) {
+                        // Mostrar el modal con la imagen
+                        const modal = document.getElementById("myModal");
+                        modal.innerHTML = `
+                            <span class="close-button" id="closeModal">&times;</span>
+                            <img src="https://stickerly.pstatic.net/sticker_pack/1OzmnaU2rNLhyhkZpvaJQg/EHOKAC/6/6d1473fd-9234-4992-8972-0312093022bb.png" alt="Imagen">
+                        `;
+                        modal.style.display = "block";
+                    } else if (activeCheckboxes > 4) {
                         attempts++;
                         if (attempts > 3) {
                             // Mostrar el modal en color rojo
@@ -229,10 +241,11 @@
         });
 
         // Cerrar el modal al hacer clic en la "x"
-        const closeModalButton = document.getElementById("closeModal");
-        closeModalButton.addEventListener("click", () => {
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
+        document.addEventListener("click", (e) => {
+            if (e.target && e.target.id === "closeModal") {
+                const modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
         });
     </script>
 </body>

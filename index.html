@@ -202,12 +202,13 @@
             <p>Eres una persona que lo quiere todo al mismo tiempo. ¡Revisa tus prioridades!</p>
         </div>
     </div>
-
     <script>
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         let activeCheckboxes = 0;
         let attempts = 0;
-
+        let timeoutId = null;
+        let toastVisible = false;
+    
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 if (checkbox.checked) {
@@ -222,7 +223,7 @@
                         modal.style.display = "block";
                     } else if (activeCheckboxes > 4) {
                         attempts++;
-                        if (attempts > 3) {
+                        if (attempts > 2) {
                             // Mostrar el modal en color rojo
                             const modal = document.getElementById("myModal");
                             modal.style.display = "block";
@@ -234,12 +235,22 @@
                             activeCheckboxes--;
                         }
                     }
+                    if (activeCheckboxes === 2 || activeCheckboxes === 3) {
+                        // Si hay 2 o 3 checkboxes activos, configurar un temporizador de 5 segundos
+                        timeoutId = setTimeout(() => {
+                            if (!toastVisible) {
+                                showHappinessToast();
+                                toastVisible = true;
+                            }
+                        }, 3000);
+                    }
                 } else {
                     activeCheckboxes--;
+                    clearTimeout(timeoutId); // Reiniciar el temporizador si se desactiva una casilla
                 }
             });
         });
-
+    
         // Cerrar el modal al hacer clic en la "x"
         document.addEventListener("click", (e) => {
             if (e.target && e.target.id === "closeModal") {
@@ -247,6 +258,61 @@
                 modal.style.display = "none";
             }
         });
+    
+        function showHappinessToast() {
+            const toast = document.createElement("div");
+            toast.innerHTML = "Eres una persona que alcanza la felicidad con mucha facilidad";
+            toast.style.position = "fixed";
+            toast.style.top = "50%";
+            toast.style.left = "50%";
+            toast.style.transform = "translate(-50%, -50%)";
+            toast.style.padding = "20px";
+            toast.style.backgroundColor = "lightgreen";
+            toast.style.color = "black";
+            toast.style.borderRadius = "10px";
+            toast.style.zIndex = "9999";
+            toast.style.fontSize = "24px"; // Aumentar el tamaño de la fuente
+            toast.style.opacity = "0"; // Configurar la opacidad inicial
+            document.body.appendChild(toast);
+    
+            // Mostrar el mensaje gradualmente
+            const fadeDuration = 1000; // Duración de la animación en milisegundos
+            const fadeInterval = 20; // Intervalo de tiempo para la animación en milisegundos
+            const initialOpacity = 0;
+            const targetOpacity = 1;
+            let currentOpacity = initialOpacity;
+    
+            const fadeInInterval = setInterval(() => {
+                if (currentOpacity < targetOpacity) {
+                    currentOpacity += (fadeInterval / fadeDuration);
+                    toast.style.opacity = currentOpacity;
+                } else {
+                    clearInterval(fadeInInterval);
+                    // Configurar temporizador para ocultar el mensaje después de 3 segundos
+                    setTimeout(() => {
+                        fadeOutInterval();
+                    }, 3000);
+                }
+            }, fadeInterval);
+    
+            const fadeOutInterval = () => {
+                const fadeOutInterval = setInterval(() => {
+                    if (currentOpacity > initialOpacity) {
+                        currentOpacity -= (fadeInterval / fadeDuration);
+                        toast.style.opacity = currentOpacity;
+                    } else {
+                        clearInterval(fadeOutInterval);
+                        // Eliminar el mensaje después de que se haya desvanecido completamente
+                        setTimeout(() => {
+                            toast.remove();
+                            toastVisible = false;
+                        }, 1000);
+                    }
+                }, fadeInterval);
+            };
+        }
     </script>
+    
+    
 </body>
 </html>
